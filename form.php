@@ -40,24 +40,42 @@
 		
 		<?php include('inc/header.inc.php'); ?>
 
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<form id="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 			<fieldset>
 				<p>
 					<label for="name">Name:</label><?php echo @$name_error; ?>
-					<input type="text" id="name" name="name" value="<?php echo @$name ?>" class="required" />
+					<input type="text" id="name" name="name" value="<?php echo @$name ?>" class="required" required/>
 				</p>
 				<p>
 					<label for="email">Email:</label><?php echo @$email_error; ?>
-					<input type="text" id="email" name="email" value="<?php echo @$email ?>" class="email required" />
+					<input type="email" id="email" name="email" value="<?php echo @$email ?>" class="email required" required/>
 				</p>
 				<p>
 					<label for="message">Message:</label><?php echo @$message_error; ?>
-					<textarea cols="45" rows="7" id="message" name="message" class="required"><?php echo @$message ?></textarea>
+					<textarea cols="45" rows="7" id="message" name="message" class="required" required><?php echo @$message ?></textarea>
 				</p>
 				<input name="submitted" type="submit" value="Send" />
 			</fieldset>
 		</form>
 <?php include('inc/footer.inc.php'); ?>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+			$(document).ready(function(){
+				$('#contact-form').submit(function(e){
+				if($('#name').val() == '' || $('email').val() == ''){
+					alert('Please fill out both the name and email'); 
+						  e.preventDefault();
+				}
+					
+				});
+				
+			});
+	
+	
+	</script>
+
+
 
 	</body>
 </html>
